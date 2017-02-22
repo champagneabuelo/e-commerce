@@ -1,8 +1,9 @@
 # Milestone 2 README
-General information about the configuration of the site so far, particularly DB stuff
+General information about the configuration of the site so far, particularly DB stuff.
 
 ## Database Schema
 Name of DB: ecomm
+
 Column names:
   - firstName: char(30)
   - lastName: char(30)
