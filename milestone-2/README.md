@@ -4,10 +4,13 @@ General information about the configuration of the site so far, particularly DB 
 ## Database Schema
 Name of DB: ecomm
 
+Name of Table: siteusers
+
 Column names:
   - firstName: char(30)
   - lastName: char(30)
   - email: char(50)
+  - password: char(20)
   - address: char(50)
   - city: char(30)
   - state: char(20)
