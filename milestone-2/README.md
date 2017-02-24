@@ -3,7 +3,9 @@ General information about the configuration of the site so far, particularly DB 
 
 ## Database Configration
 *You may need to change your user settings on your XAMPP*
+
 User: root
+
 Password: password
 
 ## Database Schema
