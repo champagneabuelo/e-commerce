@@ -1,7 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<?php
+
+include 'dbconnect.php';
+include 'newuser.php';
+
+if (isset($_POST["confirmsignup"])) {
+	// connect to the ecomm database
+	$conn = openCon();
+
+	$fn 	= $_POST['firstname'];
+	$ln 	= $_POST['lastname'];
+	$email  = $_POST['email'];
+	$pw	= $_POST['password'];
+	$addr 	= $_POST['address'];
+	$city 	= $_POST['city'];
+	$st	= $_POST['state'];
+	$zip	= $_POST['zip'];
+
+	$found = checkUserInput($conn, $email);
+
+	if ($found) {
+		echo "HELLO";	
+	} else {
+		saveToDB($conn, $fn, $ln, $email, $pw, $addr, $city, $st, $zip);	
+	}
+}
+
+?>
+
+
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -72,7 +101,6 @@
 
     <!-- Page Content -->
     <div class="container">
-
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
@@ -85,7 +113,7 @@
             </div>
         </div>
         <!-- /.row -->
- 	<form action="newuser.php" method="POST" class="form-horizontal">
+ 	<form action="signup.php" method="POST" class="form-horizontal">
 		<fieldset>
 		<!-- Sign Up Form -->
 		    <!-- Text input-->
@@ -157,16 +185,6 @@
 		      </div>
 		    </div>
 		    
-		    <!-- Text input-->
-		    <!--
-		    <div class="control-group">
-		      <label class="control-label" for="reenterpassword">Re-Enter Password:</label>
-		      <div class="controls">
-			<input id="reenterpassword" class="form-control" name="reenterpassword" type="password" placeholder="********" class="input-large" required="">
-		      </div>
-		    </div>
-		    -->
-
 		    <!-- Button -->
 		    <div class="control-group">
 		      <label class="control-label" for="confirmsignup"></label>
@@ -176,6 +194,27 @@
 		    </div>
 		    </fieldset>
 		    </form>
+
+		<!-- confirmation modal -->
+		<div id="myModal" class="modal fade in">
+		<div class="modal-dialog">
+		    <div class="modal-content">
+	 
+			<div class="modal-header">
+			    <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+			    <h4 class="modal-title">Modal Heading</h4>
+			</div>
+			<div class="modal-body">
+			    <h4>Text in a modal</h4>
+			    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+			</div>
+		    </div>
+		    <!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dalog -->
+	    </div>
+	    <!-- /.modal -->
+
             </div>
         </div>
         <!-- /.row -->

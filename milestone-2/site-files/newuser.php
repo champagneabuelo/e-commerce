@@ -1,30 +1,32 @@
 <?php
-include 'dbconnect.php';
-
 // connect to the ecomm database
-$conn = openCon();
+function saveToDB($conn, $fn, $ln, $email, $pw, $addr, $city, $st, $zip) {
+	$saveuser = "INSERT INTO siteusers 
+			(firstName, lastName, email, password, address, city, state, zipcode)
+			VALUES
+			('$fn','$ln','$email','$pw','$addr','$city','$st','$zip')";
 
-$fn 	= $_POST['firstname'];
-$ln 	= $_POST['lastname'];
-$email  = $_POST['email'];
-$pw	= $_POST['password'];
-$addr 	= $_POST['address'];
-$city 	= $_POST['city'];
-$st	= $_POST['state'];
-$zip	= $_POST['zip'];
+	$result = mysqli_query($conn, $saveuser);
 
-$saveuser = "INSERT INTO siteusers 
-		(firstName, lastName, email, password, address, city, state, zipcode)
-		VALUES
-		('$fn','$ln','$email','$pw','$addr','$city','$st','$zip')";
+	if (!$result) {
+		echo "Save failed.";
+	}
+}
 
-$result = mysqli_query($conn, $saveuser);
+function checkUserInput($conn, $email) {
+	$checkuser = "SELECT * from siteusers WHERE email = '$email'"; 
+	$query = mysqli_query($conn, $checkuser);
+	$found = mysqli_num_rows($query);
 
-if ($result) {
-	//echo "Save successful!";
-	header("location: index.html");
-} else {
-	echo "Save failed.";
+	$return = null;
+	
+	if ($found > 0) {
+		$return = TRUE;
+	} else {
+		$return = FALSE;
+	}
+
+	return $return;
 }
 
 ?>
