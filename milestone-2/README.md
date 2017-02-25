@@ -1,6 +1,13 @@
 # Milestone 2 README
 General information about the configuration of the site so far, particularly DB stuff.
 
+## Database Configration
+*You may need to change your user settings on your XAMPP*
+
+User: root
+
+Password: password
+
 ## Database Schema
 Name of DB: ecomm
 
