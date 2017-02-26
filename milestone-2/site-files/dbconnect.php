@@ -7,7 +7,7 @@
 function openCon() {
 	$host 	= "localhost";
 	$user 	= "root";
-	$pass 	= "password";
+	$pass 	= "";
 	$db	= "ecomm";
 
 	$conn 	= new mysqli($host, $user, $pass, $db);

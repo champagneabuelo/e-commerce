@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <?php
-
 include 'dbconnect.php';
 include 'newuser.php';
 
@@ -22,15 +21,16 @@ if (isset($_POST["confirmsignup"])) {
 	$found = checkUserInput($conn, $email);
 
 	if ($found) {
-		echo "HELLO";	
+		echo '<script language="javascript">';
+		echo 'alert("You have already registered!")';
+		echo '</script>';
+
 	} else {
+		// TODO add an alert here?? js alerts arent working for this part...
 		saveToDB($conn, $fn, $ln, $email, $pw, $addr, $city, $st, $zip);	
 	}
 }
-
 ?>
-
-
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,13 +49,6 @@ if (isset($_POST["confirmsignup"])) {
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     <style type="text/css"> 
     	body {
 		background: #ffd699;
@@ -64,11 +57,9 @@ if (isset($_POST["confirmsignup"])) {
 	}
     </style>
 
-
 </head>
 
 <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -194,27 +185,6 @@ if (isset($_POST["confirmsignup"])) {
 		    </div>
 		    </fieldset>
 		    </form>
-
-		<!-- confirmation modal -->
-		<div id="myModal" class="modal fade in">
-		<div class="modal-dialog">
-		    <div class="modal-content">
-	 
-			<div class="modal-header">
-			    <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-			    <h4 class="modal-title">Modal Heading</h4>
-			</div>
-			<div class="modal-body">
-			    <h4>Text in a modal</h4>
-			    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-			</div>
-		    </div>
-		    <!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dalog -->
-	    </div>
-	    <!-- /.modal -->
-
             </div>
         </div>
         <!-- /.row -->
