@@ -6,7 +6,7 @@ General information about the configuration of the site so far, particularly DB 
 
 User: root
 
-Password: password
+No password (i.e. "")
 
 ## Database Schema
 Name of DB: ecomm
