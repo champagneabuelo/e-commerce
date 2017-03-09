@@ -2,11 +2,13 @@
 PayPal, Gmail Login information, other details for this milestone
 
 ## Gmail Information
-Username: hoosridingemail@gmail.com
+Username: hoosridingemail@gmail.com 
+
 Password: ecommerce1
 
 ## PayPal Information
 Username: hoosridingemail@gmail.com
+
 Password: ecommerce1
 
 
