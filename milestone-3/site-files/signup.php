@@ -8,90 +8,22 @@ include 'newuser.php';
 if (isset($_POST["confirmsignup"])) {
 	// connect to the ecomm database
 	$conn = openCon();
-	$complete = TRUE; 
-	$valid = true;
+	
 	$fn 	= $_POST['firstname'];
-	if(empty($fn)){
-		$complete = FALSE;
-	}
-	for($i = 0; $i<strlen($fn); $i++){
-		$c = ord($fn[$i]);
-		if($c<65||$c>122){
-			$valid = FALSE;
-		}
-
-	}
-
 	$ln 	= $_POST['lastname'];
-	if(empty($ln)){
-		$complete = FALSE;
-	}
-	for($i = 0; $i<strlen($ln); $i++){
-		$c = ord($ln[$i]);
-		if($c<65||$c>122){
-			$valid = FALSE;
-		}
-
-	}
-
 	$email  = $_POST['email'];
-	$first = "@";
-	$second = ".";
-	$pos1 = strpos($email, '@');
-	$pos2 = strrpos($email, '.');
-	if(strpos($email, '@') ===false || strrpos($email, '.') === false || $pos2 < $pos1){
-		$valid = FALSE;
-	}
-	if(empty($email)){
-		$complete = FALSE;
-	}
-
 	$pw	= $_POST['password'];
-	if(empty($pw)){
-		$complete = FALSE;
-	}
-
-	$addr = $_POST['address'];
-	if(empty($addr)){
-		$complete = FALSE;
-	}
-
+	$addr 	= $_POST['address'];
 	$city 	= $_POST['city'];
-	if(empty($city)){
-		$complete = FALSE;
-	}
-	for($i = 0; $i<strlen($city); $i++){
-		$c = ord($city[$i]);
-		if($c<65||$c>122){
-			$valid = FALSE;
-		}
-
-	}
-
 	$st	= $_POST['state'];
-	if(empty($st)){
-		$complete = FALSE;
-	}
-	for($i = 0; $i<strlen($st); $i++){
-		$c = ord($st[$i]);
-		if($c<65||$c>122){
-			$valid = FALSE;
-		}
-
-	}
-
 	$zip	= $_POST['zip'];
-	if(empty($zip)){
-		$complete = FALSE;
-	}
-	for($i = 0; $i<strlen($zip); $i++){
-		$c = ord($zip[$i]);
-		if($c<47||$c>57){
-			$valid = FALSE;
 
-	}
-}
+	// check for field completeness	
+	$complete=checkCompleteInput($fn, $ln, $email, $pw, $addr, $city, $st, $zip); 
+	// validate user input
+	$valid 	= checkValidInput($fn, $ln, $email, $city, $st, $zip);
 
+	// check for previously created user
 	$found = checkUserInput($conn, $email);
 
 	if ($found) {
@@ -99,22 +31,13 @@ if (isset($_POST["confirmsignup"])) {
 		echo 'alert("You have already registered!")';
 		echo '</script>';
 
-	} 
-
-
-	else if($valid==false){
-		echo "False";
+	} else if (!$valid) {
 		echo '<script language="javascript">';
 		echo 'alert("Fill in valid information only!")';
 		echo '</script>';
-	}
-
-	else if($complete==true) {
-		// TODO add an alert here?? js alerts arent working for this part...
+	} else if($complete) {
 		saveToDB($conn, $fn, $ln, $email, $pw, $addr, $city, $st, $zip);	
-	}
-	
-	else{
+	} else {
 		echo '<script language="javascript">';
 		echo 'alert("Fill in all required blanks!")';
 		echo '</script>';
