@@ -4,6 +4,7 @@
 <?php
 include 'dbconnect.php';
 include 'newuser.php';
+include 'signupemail.php';
 
 if (isset($_POST["confirmsignup"])) {
 	// connect to the ecomm database
@@ -36,14 +37,14 @@ if (isset($_POST["confirmsignup"])) {
 		echo 'alert("Fill in valid information only!")';
 		echo '</script>';
 	} else if($complete) {
-		saveToDB($conn, $fn, $ln, $email, $pw, $addr, $city, $st, $zip);	
+		saveToDB($conn, $fn, $ln, $email, $pw, $addr, $city, $st, $zip);
+		sendConfirmTo($email, $fn);
 	} else {
 		echo '<script language="javascript">';
 		echo 'alert("Fill in all required blanks!")';
 		echo '</script>';
 	}
 }
-
 ?>
 
     <meta charset="utf-8">
