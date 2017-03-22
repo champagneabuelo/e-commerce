@@ -13,9 +13,9 @@ if (session_id() !== "") {
     */
 $hostName = $_SERVER['HTTP_HOST'];
 $appName = explode("/", $_SERVER['REQUEST_URI'])[1];
-$cancelUrl= "http://".$hostName."/".$appName."/cancel.php";
-$payUrl = "http://".$hostName."/".$appName."/pay.php";
-$placeOrderUrl = "http://".$hostName."/".$appName."/placeOrder.php";
+$cancelUrl= "http://".$hostName."/".$appName."/milestone-3/milestone-3/site-files/cancel.php";
+$payUrl = "http://".$hostName."/".$appName."/milestone-3/milestone-3/site-files/pay.php";
+$placeOrderUrl = "http://".$hostName."/".$appName."/milestone-3/milestone-3/site-files/placeOrder.php";
 
 $_SESSION['expressCheckoutPaymentData'] = '{
                                   "transactions":[
