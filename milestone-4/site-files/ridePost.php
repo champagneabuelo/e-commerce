@@ -191,12 +191,21 @@ echo "<script src='//www.paypalobjects.com/api/checkout.js' async></script>";
         <?php
         $_SESSION["user"] = $user;
         ?>
-        <form id="myContainer" action="startPayment.php" method="POST">
-    <input type="hidden" name="csrf" value="<?php echo($_SESSION['csrf']);?>"/>
-    Camera:<input type="text" name="camera_amount" value=<?php echo "$price"?> readonly></input><br>
-    Tax:<input type="text" name="tax" value="5" readonly></input><br>
-    Total:<input type="text" name="total_amount" value=<?php echo "$price"?> readonly></input><br>
-    Currency:<input type="text" name="currencyCodeType" value="USD" readonly></input><br>
+        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="cmd" value="_xclick">
+  <INPUT TYPE="hidden" NAME="return" value="http://localhost/index.php">
+  <INPUT TYPE="hidden" NAME="cancel_return" value="http://localhost/index.php">
+  <input type="hidden" name="business" value="jev4zs-facilitator@virginia.edu">
+  <input type="hidden" name="item_name" value="Ride">
+  <input type="hidden" name="item_number" value="MEM32507725">
+  <input type="hidden" name="amount" value="15">
+  <input type="hidden" name="tax" value="1">
+  <input type="hidden" name="quantity" value="1">
+  <input type="hidden" name="currency_code" value="USD">
+  <!-- Set variables that override the address stored with PayPal. -->
+  <input type="image" name="submit"
+    src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif"
+    alt="PayPal - The safer, easier way to pay online">
 </form>
 
         <hr>
