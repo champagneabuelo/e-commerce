@@ -19,19 +19,13 @@ include 'getRiderData.php';
 if(isset($_GET['lastname'])){
     $lastname = $_GET['lastname'];
     $conn = openCon();
-$first = getFirst($conn, $lastname);
-$email = getEmail($conn, $lastname);
-$destination = getDestination($conn, $lastname);
-$description = getDescription($conn, $lastname);
-$price = getPrice($conn, $lastname);
-$title = getTitle($conn, $lastname);
-    
+    $first = getFirst($conn, $lastname);
+    $email = getEmail($conn, $lastname);
+    $destination = getDestination($conn, $lastname);
+    $description = getDescription($conn, $lastname);
+    $price = getPrice($conn, $lastname);
+    $title = getTitle($conn, $lastname);
 }
-
-
-
-
-
 
 echo "<script type='text/javascript'>";
    echo "window.paypalCheckoutReady = function () {";

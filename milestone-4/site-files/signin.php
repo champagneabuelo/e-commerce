@@ -19,7 +19,6 @@ if (isset($_POST["confirmsignin"])) {
 	// validate user input
 	$valid 	= signInVerify($conn, $email, $pw);
 
-
 	if ($valid) {
         $_SESSION["user"] = $email;
 		echo '<script language="javascript">';
@@ -74,18 +73,22 @@ if (isset($_POST["confirmsignin"])) {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">The Carpool Company</a>
+                <a class="navbar-brand" href="index.php">The Carpool Company</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="about.html">About</a>
+                        <a href="about.php">About</a>
 
                     </li>
                     <li class="active">
+                        <a href="signup.php">Sign In</a>
+                    </li>
+                    <li>
                         <a href="signup.php">Sign Up</a>
                     </li>
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -103,7 +106,7 @@ if (isset($_POST["confirmsignin"])) {
                 <ol class="breadcrumb">
                     <li><a href="index.html">Home</a>
                     </li>
-                    <li class="active">Registration</li>
+                    <li class="active">Sign In</li>
                 </ol>
             </div>
         </div>

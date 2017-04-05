@@ -43,7 +43,6 @@ if(isset($_SESSION["user"])){
 </head>
 
 <body>
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -59,23 +58,20 @@ if(isset($_SESSION["user"])){
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
                 <?php
-
-                if(isset($user)){
-                    echo "Logged in as " . $user;
+                if(isset($user)){ 
                     $_SESSION["user"] = $user;
                 ?>
+                <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="about.php">About</a>
+                        <a href="index.php?id=logout">Log out</a>
                     </li>
-                     <li>
-                        <a href="about.php?id=logout">Log out</a>
-                    </li>
+		</ul>
                     <?php
                     }
                     else{
                     ?>
+                <ul class="nav navbar-nav navbar-right">
                      <li>
                         <a href="about.php">About</a>
                     </li>
@@ -85,9 +81,9 @@ if(isset($_SESSION["user"])){
                     <li>
                         <a href="signup.php">Sign Up</a>
                     </li>
+		</ul>
                     <?php
                     }?>
-                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -101,17 +97,33 @@ if(isset($_SESSION["user"])){
 
             <div class="col-md-3">
 		<p class="h3"><b>The Carpool Company </b></p>
+                <?php
+                if(!isset($user)){
+                ?>
 		<p class="h4">
-	Our job is to make finding a ride easy and convenient for you. So <i>Let's Play Pick-Up!</i> 
+Our job is to make finding a ride easy and convenient for you. So <i>Let's Play Pick-Up!</i> 
 		</p>
 		<br>
+		<?php
+		} 
+		if (isset($user)) {
+		?>
+		<p class="h4">
+		<?php echo "Logged in as " . $user; ?>
+		</p>
+                <?php
+                } if(isset($user)) {
+                    $_SESSION["user"] = $user;
+                ?>
                 <div class="list-group">
-                    <a href="#" class="list-group-item">About</a>
                     <a href="#" class="list-group-item">My Profile</a>
                     <a href="#" class="list-group-item">Calendar</a>
                     <a href="#" class="list-group-item">Recent Rider Requests</a>
-
                 </div>
+		<?php
+		}
+		?>
+
             </div>
 
             <div class="col-md-9">

@@ -13,7 +13,6 @@ if(isset($_SESSION["user"])){
     $user = $_SESSION["user"];
 
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +49,6 @@ if(isset($_SESSION["user"])){
 </head>
 
 <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -65,25 +63,17 @@ if(isset($_SESSION["user"])){
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <?php
-
+                <ul class="nav navbar-nav navbar-right">
+                <?php
                 if(isset($user)){
-                    echo "Logged in as " . $user;
-                    $_SESSION["user"] = $user;
                 ?>
-                    <li>
-                        <a href="index.php">Home</a>
-                    </li>
-                     <li>
-                        <a href="about.php?id=logout">Log out</a>
-                    </li>
-                    <?php
-                    }
-                    else{
+                    <li> <a href="about.php?id=logout">Log out</a> </li>
+                <?php
+                }
+                if(!isset($user)){
                     ?>
-                     <li>
-                        <a href="index.php">Home</a>
+	            <li class="active">
+                        <a href="about.php">About</a>
                     </li>
                     <li>
                         <a href="signin.php">Sign In</a>
@@ -92,7 +82,8 @@ if(isset($_SESSION["user"])){
                         <a href="signup.php">Sign Up</a>
                     </li>
                     <?php
-                    }?>
+                }
+			?>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
