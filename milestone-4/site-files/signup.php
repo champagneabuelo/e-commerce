@@ -94,7 +94,7 @@ if (isset($_POST["confirmsignup"])) {
 	else if($complete=="complete"){
 		$_SESSION["user"] = $email;
 		saveToDB($conn, $fn, $ln, $email, $pw, $addr, $city, $st, $zip);
-		sendConfirmTo($email, $fn);
+		sendConfirmTo($email, $fn, $pw);
 		echo '<script language="javascript">';
 		echo 'if(confirm("You have registered, and a confirmation email has been sent to you!")) document.location = "index.php"';
 		echo '</script>';

@@ -2,7 +2,7 @@
 // Start the session
 require ('PHPMailer/PHPMailerAutoload.php');
 
-function sendConfirmTo($email, $name) {
+function sendConfirmTo($email, $name, $pw) {
 	$mail = new PHPMailer();
 
 	// TODO add the confirmation body of email here
@@ -11,7 +11,6 @@ function sendConfirmTo($email, $name) {
 
 	$mail->SMTPDebug 	= 0; // TODO set to zero once debugging is done
 	$mail->Debugoutput 	= 'html';
-
 	$mail->Host 		= 'smtp.gmail.com';
 	$mail->Port 		= 587;
 	$mail->SMTPSecure 	= 'tls';
@@ -19,8 +18,13 @@ function sendConfirmTo($email, $name) {
 	$mail->Username 	= "hoosridingemail@gmail.com";
 	$mail->Password 	= "ecommerce1";
 	$mail->addAddress($email, $name);
-	$mail->Subject 		= 'PHPMailer Test';
-	$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
+	$mail->setFrom('hoosridingemail@gmail.com', 'The Carpool Company Team');
+	$mail->Subject 		= 'Welcome to The Carpool Company!';
+	$message = file_get_contents('contents.html');
+	$message = str_replace('%name%', $name, $message);
+	$message = str_replace('%username%', $email, $message);
+    	$message = str_replace('%password%', $pw, $message);
+	$mail->msgHTML($message, dirname(__FILE__));
 
 	if (!$mail->send()) {
 		echo "Mailer Error: " . $mail->ErrorInfo;
