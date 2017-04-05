@@ -125,11 +125,12 @@ Our job is to make finding a ride easy and convenient for you. So <i>Let's Play 
 		?>
 
             </div>
-
+	    
             <div class="col-md-9">
-
                 <div class="row carousel-holder">
-
+		    <?php
+	            if (!isset($user)) {
+	    	    ?>
                     <div class="col-md-12">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
@@ -156,8 +157,10 @@ Our job is to make finding a ride easy and convenient for you. So <i>Let's Play 
                             </a>
                         </div>
                     </div>
-
                 </div>
+		<?php
+		} 
+		?>
 
                 <div class="row">
 

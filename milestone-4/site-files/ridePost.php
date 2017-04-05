@@ -7,9 +7,7 @@ if(isset($_SESSION["user"])){
     $user = $_SESSION["user"];
 
 }
-if(!isset($_SESSION["user"])){
-    $user = "Anonymous";
-}
+
 include 'dbconnect.php';
 include 'newuser.php';
 include 'apiCallsData.php';
@@ -64,16 +62,11 @@ echo "<script src='//www.paypalobjects.com/api/checkout.js' async></script>";
     <!-- Background color for template --> 
     <style type="text/css"> 
         body {
-        background: #ffd699;
+        	background: #ffd699;
+		padding-top: 30px;
+		padding-bottom: 30px;
     }
     </style>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body>
@@ -93,14 +86,33 @@ echo "<script src='//www.paypalobjects.com/api/checkout.js' async></script>";
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <?php
+                if(isset($user)){ 
+                    $_SESSION["user"] = $user;
+                ?>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
+                        <a href="index.php?id=logout">Log out</a>
+                    </li>
+		</ul>
+                    <?php
+                    }
+                    else{
+                    ?>
+                <ul class="nav navbar-nav navbar-right">
+                     <li>
                         <a href="about.php">About</a>
                     </li>
                     <li>
-                        <a href="index.php">Home</a>
+                        <a href="signin.php">Sign In</a>
                     </li>
-                </ul>
+                    <li>
+                        <a href="signup.php">Sign Up</a>
+                    </li>
+		</ul>
+                    <?php
+                    }
+		    ?>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -150,6 +162,9 @@ echo "<script src='//www.paypalobjects.com/api/checkout.js' async></script>";
                 <hr>
 
                 <!-- Blog Comments -->
+		<?php
+	        if (isset($user)) {
+	    	?>
 
                 <!-- Comments Form -->
                 <div class="well">
@@ -161,14 +176,22 @@ echo "<script src='//www.paypalobjects.com/api/checkout.js' async></script>";
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
+		<?php
+	       	}    	
+		?>
+		<?php
+	        if (!isset($user)) {
+	    	?>
+		<p class="lead"> Want to get on this ride? </p>
+		<a class="btn btn-primary btn-lg" href="signup.php" > Sign Up Now!</a>
+		<?php
+	       	}    	
+		?>
+
 
                 <hr>
 
                 <!-- Posted Comments -->
-
-                
-
-              
                     </div>
                 </div>
 
@@ -182,16 +205,22 @@ echo "<script src='//www.paypalobjects.com/api/checkout.js' async></script>";
 
         </div>
         <!-- /.row -->
-        <?php
+	<?php
+	if (isset($user)) {
+
         $_SESSION["user"] = $user;
         ?>
         <form id="myContainer" action="startPayment.php" method="POST">
-    <input type="hidden" name="csrf" value="<?php echo($_SESSION['csrf']);?>"/>
-    Camera:<input type="text" name="camera_amount" value=<?php echo "$price"?> readonly></input><br>
-    Tax:<input type="text" name="tax" value="5" readonly></input><br>
-    Total:<input type="text" name="total_amount" value=<?php echo "$price"?> readonly></input><br>
-    Currency:<input type="text" name="currencyCodeType" value="USD" readonly></input><br>
-</form>
+    		<input type="hidden" name="csrf" value="<?php echo($_SESSION['csrf']);?>"/>
+    		Camera:<input type="text" name="camera_amount" value=<?php echo "$price"?> readonly></input><br>
+    		Tax:<input type="text" name="tax" value="5" readonly></input><br>
+    		Total:<input type="text" name="total_amount" value=<?php echo "$price"?> readonly></input><br>
+    		Currency:<input type="text" name="currencyCodeType" value="USD" readonly></input><br>
+	</form>
+
+	<?php
+	 }    	
+	?>
 
         <hr>
 
